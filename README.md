@@ -1,6 +1,10 @@
 # FirebaseCms
 
-# Instruction
+## Requirements
+Node 
+Angular
+
+## Instruction
 ```
 git clone https://github.com/pownthep/firebase-cms.git
 cd firebase-cms
