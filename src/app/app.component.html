@@ -1,21 +1,33 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<input id="searchBox" (keyup.enter)="search()" class="" type="search" placeholder="Search..." [value]="input" (input)="input = $event.target.value">
+<div class="grid">
+  <div class="editor">
+    <h1>Editor</h1>
+    <input [value]="title" (input)="title = $event.target.value" type="text" class="uk-input" placeholder="Title">
+    <input [value]="ep" (input)="ep = $event.target.value" type="number" class="uk-input" placeholder="Episode">
+    <input [value]="tags" (input)="tags = $event.target.value" type="text" class="uk-input" placeholder="Tags">
+    <input [value]="thumbnail" (input)="thumbnail = $event.target.value" type="text" class="uk-input" placeholder="Thumbnail">
+    <input [value]="author" (input)="author = $event.target.value" type="text" class="uk-input" placeholder="Author">
+    <input [value]="date" (input)="date = $event.target.value" type="text" class="uk-input" placeholder="Created at">
+    <p>Markdown</p>
+    <textarea  [value]="md" (input)="md = $event.target.value" class=".uk-textarea"></textarea>
+    <br>
+    <button *ngIf="!updating" class="uk-button uk-button-default" (click)="post()">Post</button>
+    <button *ngIf="updating" class="uk-button uk-button-default" (click)="update()">Update</button>
+    <button *ngIf="updating" class="uk-button uk-button-default" (click)="delete()">Delete</button>
+    <button class="uk-button uk-button-default" (click)="reset()">Reset</button>
+  </div>
+  <div class="preview">
+    <h1>Preview</h1>
+    ID: {{this.id}}
+    Title: {{this.title}} <br>
+    Ep: {{this.ep}} <br>
+    Tags: {{this.tags}} <br>
+    Thumbnail: {{this.thumbnail}}<br>
+    Author: {{this.author}} <br>
+    Created at: {{this.date}} <br>
+    <markdown [data]="md"></markdown>
+    {{this.doc | json}}
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
 <router-outlet></router-outlet>
