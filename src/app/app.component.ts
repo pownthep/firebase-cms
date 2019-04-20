@@ -21,6 +21,7 @@ export class AppComponent {
   id: string;
   updating = false;
   item: any;
+  newId: string;
   constructor(public afs: AngularFirestore) {
 
   }
@@ -28,7 +29,8 @@ export class AppComponent {
   post() {
     var answer = confirm("Save data?")
     if (answer) {
-      this.afs.collection('posts').add({
+      this.newId = this.afs.createId();
+      this.afs.collection('posts').doc(this.newId).set({
         title: this.title,
         episode: this.ep,
         tags: this.tags,
@@ -37,10 +39,18 @@ export class AppComponent {
         date: this.date,
         body: this.md
       }).then(
-        () => alert("Success!")
+        () => {alert("Success!"); this.id = this.newId }
       ).catch(
         () => alert('LMAO')
       );
+
+      this.afs.collection('post-list').add(
+        {
+          thumbnail: this.thumbnail,
+          description: this.title,
+          post_id: this.newId
+        }
+      )
     }
   }
   update() {
